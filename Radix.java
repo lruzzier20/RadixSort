@@ -34,8 +34,6 @@ public class Radix{
         bucket[nth(master.get(l), i)].add(master.get(l));
       }
         dumpster.extend(master);
-      for(int f=0;f<bucket.length;f++){
-        }
       for(int j=0;j<bucket.length;j++){
         master.extend(bucket[j]);
       }
@@ -47,7 +45,7 @@ public class Radix{
     int largest=1;
     SortableLinkedList dumpster = new SortableLinkedList();
     SortableLinkedList master = data;
-    SortableLinkedList[] bucket = new SortableLinkedList[10];
+    SortableLinkedList[] bucket = new SortableLinkedList[19];
     for(int m=0;m<bucket.length;m++){
       bucket[m]= new SortableLinkedList();
     }
@@ -58,11 +56,10 @@ public class Radix{
 
     for(int i=0;i<largest;i++){
       for(int l=0;l<master.size();l++){
-        bucket[nth(master.get(l), i)].add(master.get(l));
+        if(master.get(l)<0){bucket[nth(master.get(l), i)+9].add(master.get(l));}else{
+        bucket[nth(master.get(l), i)+9].add(master.get(l));}
       }
         dumpster.extend(master);
-      for(int f=0;f<bucket.length;f++){
-        }
       for(int j=0;j<bucket.length;j++){
         master.extend(bucket[j]);
       }
