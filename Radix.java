@@ -18,22 +18,21 @@ public class Radix{
 
   public static void radixSortSimple(SortableLinkedList data){
     int largest=1;
-    SortableLinkedList dumpster = new SortableLinkedList();
+    int temp=0;
+    boolean done=true;
     SortableLinkedList master = data;
     SortableLinkedList[] bucket = new SortableLinkedList[10];
     for(int m=0;m<bucket.length;m++){
       bucket[m]= new SortableLinkedList();
     }
 
-    for(int q=0;q<master.size();q++){
-      if(length(master.get(q))>largest){largest=length(master.get(q));}
-    }
-
     for(int i=0;i<largest;i++){
-      for(int l=0;l<master.size();l++){
-        bucket[nth(master.get(l), i)].add(master.get(l));
+      while(master.size()>0){
+        temp=master.remove(0);
+        if(length(temp)>largest&&done){largest=length(temp);}
+        bucket[nth(temp, i)].add(temp);
       }
-        dumpster.extend(master);
+
       for(int j=0;j<bucket.length;j++){
         master.extend(bucket[j]);
       }
@@ -43,23 +42,22 @@ public class Radix{
 
   public static void radixSort(SortableLinkedList data){
     int largest=1;
-    SortableLinkedList dumpster = new SortableLinkedList();
+    int temp=0;
+    boolean done=true;
     SortableLinkedList master = data;
     SortableLinkedList[] bucket = new SortableLinkedList[19];
     for(int m=0;m<bucket.length;m++){
       bucket[m]= new SortableLinkedList();
     }
 
-    for(int q=0;q<master.size();q++){
-      if(length(master.get(q))>largest){largest=length(master.get(q));}
-    }
-
     for(int i=0;i<largest;i++){
-      for(int l=0;l<master.size();l++){
-        if(master.get(l)<0){bucket[nth(master.get(l), i)+9].add(master.get(l));}else{
-        bucket[nth(master.get(l), i)+9].add(master.get(l));}
+      while(master.size()>0){
+        temp=master.remove(0);
+        if(length(temp)>largest&&done){largest=length(temp);}
+        if(temp<0){bucket[nth(temp, i)+9].add(temp);}else{
+        bucket[nth(temp, i)+9].add(temp);}
       }
-        dumpster.extend(master);
+      done=false;
       for(int j=0;j<bucket.length;j++){
         master.extend(bucket[j]);
       }
