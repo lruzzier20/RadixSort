@@ -10,7 +10,7 @@ public class Radix{
     return ans.length();
   }
 
-  public static void merge(MyLinkedList original, MyLinkedList[] buckets){
+  public static void merge(SortableLinkedList original, SortableLinkedList[] buckets){
     for(int i=0;i<buckets.length;i++){
       original.extend(buckets[i]);
     }
@@ -33,9 +33,7 @@ public class Radix{
         bucket[nth(temp, i)].add(temp);
       }
 
-      for(int j=0;j<bucket.length;j++){
-        master.extend(bucket[j]);
-      }
+      merge(master, bucket);
     }
     data=master;
   }
@@ -58,9 +56,7 @@ public class Radix{
         bucket[nth(temp, i)+9].add(temp);}
       }
       done=false;
-      for(int j=0;j<bucket.length;j++){
-        master.extend(bucket[j]);
-      }
+      merge(master, bucket);
     }
     data=master;
   }
